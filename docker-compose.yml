@@ -21,11 +21,8 @@ services:
       - "8001:8000"
     volumes:
       - chroma_data:/data
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v2/heartbeat"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
+    # Pas de healthcheck pour l'instant : l'image ne contient pas curl.
+    # À reprendre à l'EPIC-5, quand le backend utilisera Chroma.
 
   backend:
     build: ./backend
@@ -39,7 +36,7 @@ services:
       postgres:
         condition: service_healthy
       chroma:
-        condition: service_healthy
+        condition: service_started
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health')"]
       interval: 10s

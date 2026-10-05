@@ -10,6 +10,8 @@ Plateforme de recommandation d'offres d'emploi et de stages basée sur des agent
 - infra/ : Docker et Terraform
 - docs/ : cahier des charges, architecture
 
-## Démarrage
+  ## Démarrage rapide
 
-À compléter (US-1.2).
+  docker compose up --build
+  - API : http://localhost:8000/health
+  - Interface : http://localhost:3000
