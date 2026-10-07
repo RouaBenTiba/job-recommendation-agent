@@ -2,6 +2,8 @@
 
 Plateforme de recommandation d'offres d'emploi et de stages basée sur des agents IA.
 
+[![CI](https://github.com/RouaBenTiba/DEPOT/actions/workflows/ci.yml/badge.svg)](https://github.com/RouaBenTiba/DEPOT/actions/workflows/ci.yml)
+
 ## Structure
 
 - backend/ : API FastAPI et agent LangGraph

@@ -3,6 +3,10 @@
 .env.*
 !.env.example
 
+**/.env
+!**/.env.example
+*.pem
+*.key
 # Python
 __pycache__/
 *.py[cod]
