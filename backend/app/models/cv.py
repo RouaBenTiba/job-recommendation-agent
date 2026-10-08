@@ -19,7 +19,9 @@ class CV(UUIDPrimaryKeyMixin, TimestampMixin, Base):
         ),
     )
 
-    user_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"))
+    user_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("users.id", ondelete="CASCADE")
+    )
     filename: Mapped[str] = mapped_column(String(255))
     content_type: Mapped[str] = mapped_column(
         String(100), server_default="application/pdf"

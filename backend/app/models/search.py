@@ -23,7 +23,9 @@ class Search(UUIDPrimaryKeyMixin, CreatedAtMixin, Base):
         CheckConstraint("iterations_count >= 0", name="iterations_non_negative"),
     )
 
-    user_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"))
+    user_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("users.id", ondelete="CASCADE")
+    )
     profile_id: Mapped[uuid.UUID | None] = mapped_column(
         ForeignKey("candidate_profiles.id", ondelete="SET NULL")
     )
