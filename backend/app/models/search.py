@@ -23,16 +23,10 @@ class Search(UUIDPrimaryKeyMixin, CreatedAtMixin, Base):
         CheckConstraint("iterations_count >= 0", name="iterations_non_negative"),
     )
 
-    user_id: Mapped[uuid.UUID] = mapped_column(
-        ForeignKey("users.id", ondelete="CASCADE")
-    )
-    profile_id: Mapped[uuid.UUID | None] = mapped_column(
-        ForeignKey("candidate_profiles.id", ondelete="SET NULL")
-    )
+    user_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"))
+    profile_id: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("candidate_profiles.id", ondelete="SET NULL"))
     objective: Mapped[str] = mapped_column(Text)
-    filters: Mapped[dict[str, Any]] = mapped_column(
-        JSONB, server_default=text("'{}'::jsonb")
-    )
+    filters: Mapped[dict[str, Any]] = mapped_column(JSONB, server_default=text("'{}'::jsonb"))
     status: Mapped[str] = mapped_column(String(20), server_default="pending")
     iterations_count: Mapped[int] = mapped_column(server_default=text("0"))
     error_message: Mapped[str | None] = mapped_column(Text)

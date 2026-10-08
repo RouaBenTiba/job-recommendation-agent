@@ -46,14 +46,10 @@ def upgrade() -> None:
             server_default=sa.text("now()"),
             nullable=False,
         ),
-        sa.Column(
-            "status", sa.String(length=10), server_default="active", nullable=False
-        ),
+        sa.Column("status", sa.String(length=10), server_default="active", nullable=False),
         sa.Column("content_hash", sa.CHAR(length=64), nullable=False),
         sa.Column("indexed_at", sa.DateTime(timezone=True), nullable=True),
-        sa.Column(
-            "id", sa.Uuid(), server_default=sa.text("gen_random_uuid()"), nullable=False
-        ),
+        sa.Column("id", sa.Uuid(), server_default=sa.text("gen_random_uuid()"), nullable=False),
         sa.Column(
             "updated_at",
             sa.DateTime(timezone=True),
@@ -74,27 +70,19 @@ def upgrade() -> None:
             "source IN ('adzuna', 'jooble', 'web')",
             name=op.f("ck_job_offers_source_valid"),
         ),
-        sa.CheckConstraint(
-            "status IN ('active', 'expired')", name=op.f("ck_job_offers_status_valid")
-        ),
+        sa.CheckConstraint("status IN ('active', 'expired')", name=op.f("ck_job_offers_status_valid")),
         sa.PrimaryKeyConstraint("id", name=op.f("pk_job_offers")),
         sa.UniqueConstraint("content_hash", name=op.f("uq_job_offers_content_hash")),
-        sa.UniqueConstraint(
-            "source", "external_id", name=op.f("uq_job_offers_source_external_id")
-        ),
+        sa.UniqueConstraint("source", "external_id", name=op.f("uq_job_offers_source_external_id")),
     )
     op.create_table(
         "users",
         sa.Column("email", sa.String(length=255), nullable=False),
         sa.Column("password_hash", sa.String(length=255), nullable=False),
         sa.Column("full_name", sa.String(length=150), nullable=True),
-        sa.Column(
-            "is_active", sa.Boolean(), server_default=sa.text("true"), nullable=False
-        ),
+        sa.Column("is_active", sa.Boolean(), server_default=sa.text("true"), nullable=False),
         sa.Column("last_login_at", sa.DateTime(timezone=True), nullable=True),
-        sa.Column(
-            "id", sa.Uuid(), server_default=sa.text("gen_random_uuid()"), nullable=False
-        ),
+        sa.Column("id", sa.Uuid(), server_default=sa.text("gen_random_uuid()"), nullable=False),
         sa.Column(
             "updated_at",
             sa.DateTime(timezone=True),
@@ -123,13 +111,9 @@ def upgrade() -> None:
         sa.Column("file_size_bytes", sa.Integer(), nullable=False),
         sa.Column("storage_path", sa.String(length=500), nullable=False),
         sa.Column("extracted_text", sa.Text(), nullable=True),
-        sa.Column(
-            "status", sa.String(length=20), server_default="uploaded", nullable=False
-        ),
+        sa.Column("status", sa.String(length=20), server_default="uploaded", nullable=False),
         sa.Column("error_message", sa.Text(), nullable=True),
-        sa.Column(
-            "id", sa.Uuid(), server_default=sa.text("gen_random_uuid()"), nullable=False
-        ),
+        sa.Column("id", sa.Uuid(), server_default=sa.text("gen_random_uuid()"), nullable=False),
         sa.Column(
             "updated_at",
             sa.DateTime(timezone=True),
@@ -146,9 +130,7 @@ def upgrade() -> None:
             "status IN ('uploaded', 'parsed', 'failed')",
             name=op.f("ck_cvs_status_valid"),
         ),
-        sa.CheckConstraint(
-            "file_size_bytes > 0", name=op.f("ck_cvs_file_size_positive")
-        ),
+        sa.CheckConstraint("file_size_bytes > 0", name=op.f("ck_cvs_file_size_positive")),
         sa.ForeignKeyConstraint(
             ["user_id"],
             ["users.id"],
@@ -178,18 +160,14 @@ def upgrade() -> None:
             server_default=sa.text("'{}'::text[]"),
             nullable=False,
         ),
-        sa.Column(
-            "remote_ok", sa.Boolean(), server_default=sa.text("false"), nullable=False
-        ),
+        sa.Column("remote_ok", sa.Boolean(), server_default=sa.text("false"), nullable=False),
         sa.Column(
             "willing_to_relocate",
             sa.Boolean(),
             server_default=sa.text("false"),
             nullable=False,
         ),
-        sa.Column(
-            "id", sa.Uuid(), server_default=sa.text("gen_random_uuid()"), nullable=False
-        ),
+        sa.Column("id", sa.Uuid(), server_default=sa.text("gen_random_uuid()"), nullable=False),
         sa.Column(
             "updated_at",
             sa.DateTime(timezone=True),
@@ -216,9 +194,7 @@ def upgrade() -> None:
         sa.Column("user_id", sa.Uuid(), nullable=False),
         sa.Column("cv_id", sa.Uuid(), nullable=True),
         sa.Column("version", sa.Integer(), nullable=False),
-        sa.Column(
-            "is_current", sa.Boolean(), server_default=sa.text("true"), nullable=False
-        ),
+        sa.Column("is_current", sa.Boolean(), server_default=sa.text("true"), nullable=False),
         sa.Column("summary", sa.Text(), nullable=True),
         sa.Column(
             "education",
@@ -253,9 +229,7 @@ def upgrade() -> None:
         sa.Column("objectives", sa.Text(), nullable=True),
         sa.Column("source", sa.String(length=10), server_default="llm", nullable=False),
         sa.Column("extraction_model", sa.String(length=100), nullable=True),
-        sa.Column(
-            "id", sa.Uuid(), server_default=sa.text("gen_random_uuid()"), nullable=False
-        ),
+        sa.Column("id", sa.Uuid(), server_default=sa.text("gen_random_uuid()"), nullable=False),
         sa.Column(
             "updated_at",
             sa.DateTime(timezone=True),
@@ -272,9 +246,7 @@ def upgrade() -> None:
             "source IN ('llm', 'manual')",
             name=op.f("ck_candidate_profiles_source_valid"),
         ),
-        sa.CheckConstraint(
-            "version >= 1", name=op.f("ck_candidate_profiles_version_positive")
-        ),
+        sa.CheckConstraint("version >= 1", name=op.f("ck_candidate_profiles_version_positive")),
         sa.ForeignKeyConstraint(
             ["cv_id"],
             ["cvs.id"],
@@ -288,9 +260,7 @@ def upgrade() -> None:
             ondelete="CASCADE",
         ),
         sa.PrimaryKeyConstraint("id", name=op.f("pk_candidate_profiles")),
-        sa.UniqueConstraint(
-            "user_id", "version", name=op.f("uq_candidate_profiles_user_id_version")
-        ),
+        sa.UniqueConstraint("user_id", "version", name=op.f("uq_candidate_profiles_user_id_version")),
     )
     op.create_index(
         "uq_candidate_profiles_current_per_user",
@@ -310,9 +280,7 @@ def upgrade() -> None:
             server_default=sa.text("'{}'::jsonb"),
             nullable=False,
         ),
-        sa.Column(
-            "status", sa.String(length=20), server_default="pending", nullable=False
-        ),
+        sa.Column("status", sa.String(length=20), server_default="pending", nullable=False),
         sa.Column(
             "iterations_count",
             sa.Integer(),
@@ -322,9 +290,7 @@ def upgrade() -> None:
         sa.Column("error_message", sa.Text(), nullable=True),
         sa.Column("started_at", sa.DateTime(timezone=True), nullable=True),
         sa.Column("completed_at", sa.DateTime(timezone=True), nullable=True),
-        sa.Column(
-            "id", sa.Uuid(), server_default=sa.text("gen_random_uuid()"), nullable=False
-        ),
+        sa.Column("id", sa.Uuid(), server_default=sa.text("gen_random_uuid()"), nullable=False),
         sa.Column(
             "created_at",
             sa.DateTime(timezone=True),
@@ -335,9 +301,7 @@ def upgrade() -> None:
             "status IN ('pending', 'running', 'completed', 'failed')",
             name=op.f("ck_searches_status_valid"),
         ),
-        sa.CheckConstraint(
-            "iterations_count >= 0", name=op.f("ck_searches_iterations_non_negative")
-        ),
+        sa.CheckConstraint("iterations_count >= 0", name=op.f("ck_searches_iterations_non_negative")),
         sa.ForeignKeyConstraint(
             ["profile_id"],
             ["candidate_profiles.id"],
@@ -377,18 +341,14 @@ def upgrade() -> None:
             server_default=sa.text("'[]'::jsonb"),
             nullable=False,
         ),
-        sa.Column(
-            "id", sa.Uuid(), server_default=sa.text("gen_random_uuid()"), nullable=False
-        ),
+        sa.Column("id", sa.Uuid(), server_default=sa.text("gen_random_uuid()"), nullable=False),
         sa.Column(
             "created_at",
             sa.DateTime(timezone=True),
             server_default=sa.text("now()"),
             nullable=False,
         ),
-        sa.CheckConstraint(
-            "rank_position >= 1", name=op.f("ck_recommendations_rank_positive")
-        ),
+        sa.CheckConstraint("rank_position >= 1", name=op.f("ck_recommendations_rank_positive")),
         sa.CheckConstraint(
             "score >= 0 AND score <= 1",
             name=op.f("ck_recommendations_score_between_0_and_1"),

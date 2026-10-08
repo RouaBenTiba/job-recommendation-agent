@@ -17,3 +17,12 @@ Plateforme de recommandation d'offres d'emploi et de stages basée sur des agent
   docker compose up --build
   - API : http://localhost:8000/health
   - Interface : http://localhost:3000
+
+## Base de données
+
+```bash
+docker compose up -d postgres
+cd backend
+alembic upgrade head      # applique les migrations
+alembic revision --autogenerate -m "message"   # crée une migration après un changement de modèle
+```

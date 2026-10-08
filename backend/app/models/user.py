@@ -21,9 +21,7 @@ class User(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     is_active: Mapped[bool] = mapped_column(server_default=text("true"))
     last_login_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
-    cvs: Mapped[list["CV"]] = relationship(
-        back_populates="user", cascade="all, delete-orphan", passive_deletes=True
-    )
+    cvs: Mapped[list["CV"]] = relationship(back_populates="user", cascade="all, delete-orphan", passive_deletes=True)
     profiles: Mapped[list["CandidateProfile"]] = relationship(
         back_populates="user", cascade="all, delete-orphan", passive_deletes=True
     )

@@ -6,9 +6,7 @@ from typing import Literal
 from pydantic import SecretStr, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-DEFAULT_SECRET_KEY = (
-    "change-me-in-production"  # noqa: S105 (valeur de dev, refusée en prod)
-)
+DEFAULT_SECRET_KEY = "change-me-in-production"  # noqa: S105 (valeur de dev, refusée en prod)
 
 
 class Settings(BaseSettings):
