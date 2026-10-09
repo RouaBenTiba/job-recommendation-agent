@@ -20,6 +20,9 @@ class Settings(BaseSettings):
     secret_key: SecretStr = SecretStr(DEFAULT_SECRET_KEY)
     cors_origins: list[str] = ["http://localhost:5173"]
 
+    jwt_algorithm: str = "HS256"
+    access_token_expire_minutes: int = 30
+
     database_url: str
 
     gemini_api_key: SecretStr | None = None
