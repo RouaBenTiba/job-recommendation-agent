@@ -9,6 +9,7 @@ EXPECTED_TABLES = {
     "job_offers",
     "searches",
     "recommendations",
+    "revoked_tokens",
 }
 
 
