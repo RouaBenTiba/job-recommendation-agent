@@ -1,4 +1,6 @@
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
+
+UTC = timezone.utc
 from typing import Any
 
 from sqlalchemy import (

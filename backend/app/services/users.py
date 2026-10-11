@@ -1,7 +1,9 @@
 """User persistence. The only module that touches User columns (adapt here)."""
 
 import uuid
-from datetime import UTC, datetime
+from datetime import datetime, timezone
+
+UTC = timezone.utc
 
 from sqlalchemy import select
 from sqlalchemy.orm import Session
