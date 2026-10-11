@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime
-from typing import Annotated, Self
-
+from typing import Annotated
+from typing_extensions import Self
 from pydantic import (
     AfterValidator,
     BaseModel,
