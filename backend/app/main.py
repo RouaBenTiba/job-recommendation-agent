@@ -3,7 +3,9 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.v1 import api_router
 from app.core.config import get_settings
+from app.core.errors import register_exception_handlers
 
+register_exception_handlers(app)
 settings = get_settings()
 
 app = FastAPI(title="Job Recommender API")
