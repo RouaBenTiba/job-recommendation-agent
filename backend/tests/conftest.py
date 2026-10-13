@@ -1,6 +1,5 @@
 import os
 import uuid
-
 from collections.abc import Iterator
 
 # Fake values set before the app is imported: no real secret is ever used in tests.
