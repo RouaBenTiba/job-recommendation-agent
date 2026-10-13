@@ -11,9 +11,7 @@ def get_preferences(db: Session, user_id: uuid.UUID) -> Preference | None:
     return db.scalar(select(Preference).where(Preference.user_id == user_id))
 
 
-def upsert_preferences(
-    db: Session, user_id: uuid.UUID, data: PreferencesUpdate
-) -> Preference:
+def upsert_preferences(db: Session, user_id: uuid.UUID, data: PreferencesUpdate) -> Preference:
     preferences = get_preferences(db, user_id)
     if preferences is None:
         preferences = Preference(user_id=user_id)

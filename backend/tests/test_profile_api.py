@@ -7,20 +7,14 @@ def test_profile_requires_authentication(client: TestClient) -> None:
     assert response.json()["code"] == "unauthorized"
 
 
-def test_get_profile_returns_404_when_missing(
-    client: TestClient, auth_headers: dict[str, str]
-) -> None:
+def test_get_profile_returns_404_when_missing(client: TestClient, auth_headers: dict[str, str]) -> None:
     response = client.get("/api/v1/profile", headers=auth_headers)
     assert response.status_code == 404
     assert response.json()["code"] == "not_found"
 
 
-def test_patch_creates_first_manual_profile(
-    client: TestClient, auth_headers: dict[str, str]
-) -> None:
-    response = client.patch(
-        "/api/v1/profile", json={"skills": ["Python", "SQL"]}, headers=auth_headers
-    )
+def test_patch_creates_first_manual_profile(client: TestClient, auth_headers: dict[str, str]) -> None:
+    response = client.patch("/api/v1/profile", json={"skills": ["Python", "SQL"]}, headers=auth_headers)
     assert response.status_code == 200
     body = response.json()
     assert body["version"] == 1
@@ -28,26 +22,20 @@ def test_patch_creates_first_manual_profile(
     assert body["skills"] == ["Python", "SQL"]
 
 
-def test_patch_creates_new_version_and_keeps_other_fields(
-    client: TestClient, auth_headers: dict[str, str]
-) -> None:
+def test_patch_creates_new_version_and_keeps_other_fields(client: TestClient, auth_headers: dict[str, str]) -> None:
     client.patch(
         "/api/v1/profile",
         json={"summary": "Ingénieure logiciel", "skills": ["Python"]},
         headers=auth_headers,
     )
-    response = client.patch(
-        "/api/v1/profile", json={"skills": ["Python", "Docker"]}, headers=auth_headers
-    )
+    response = client.patch("/api/v1/profile", json={"skills": ["Python", "Docker"]}, headers=auth_headers)
     body = response.json()
     assert body["version"] == 2
     assert body["skills"] == ["Python", "Docker"]
     assert body["summary"] == "Ingénieure logiciel"  # champ non envoyé : conservé
 
 
-def test_patch_removes_duplicate_skills(
-    client: TestClient, auth_headers: dict[str, str]
-) -> None:
+def test_patch_removes_duplicate_skills(client: TestClient, auth_headers: dict[str, str]) -> None:
     response = client.patch(
         "/api/v1/profile",
         json={"skills": ["Python", "python", " Docker "]},
@@ -56,21 +44,15 @@ def test_patch_removes_duplicate_skills(
     assert response.json()["skills"] == ["Python", "Docker"]
 
 
-def test_patch_rejects_unknown_field(
-    client: TestClient, auth_headers: dict[str, str]
-) -> None:
-    response = client.patch(
-        "/api/v1/profile", json={"password_hash": "x"}, headers=auth_headers
-    )
+def test_patch_rejects_unknown_field(client: TestClient, auth_headers: dict[str, str]) -> None:
+    response = client.patch("/api/v1/profile", json={"password_hash": "x"}, headers=auth_headers)
     assert response.status_code == 422
     body = response.json()
     assert body["code"] == "validation_error"
     assert body["errors"][0]["field"] == "password_hash"
 
 
-def test_preferences_defaults_then_put_then_get(
-    client: TestClient, auth_headers: dict[str, str]
-) -> None:
+def test_preferences_defaults_then_put_then_get(client: TestClient, auth_headers: dict[str, str]) -> None:
     default = client.get("/api/v1/preferences", headers=auth_headers).json()
     assert default["contract_types"] == []
     assert default["id"] is None
@@ -84,12 +66,8 @@ def test_preferences_defaults_then_put_then_get(
     assert read["remote_ok"] is True
 
 
-def test_preferences_reject_invalid_contract_type(
-    client: TestClient, auth_headers: dict[str, str]
-) -> None:
-    response = client.put(
-        "/api/v1/preferences", json={"contract_types": ["freelance"]}, headers=auth_headers
-    )
+def test_preferences_reject_invalid_contract_type(client: TestClient, auth_headers: dict[str, str]) -> None:
+    response = client.put("/api/v1/preferences", json={"contract_types": ["freelance"]}, headers=auth_headers)
     assert response.status_code == 422
     assert response.json()["code"] == "validation_error"
 

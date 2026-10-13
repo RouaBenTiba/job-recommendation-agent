@@ -63,21 +63,19 @@ def client(db_session: Session) -> Iterator[TestClient]:
     with TestClient(app) as test_client:
         yield test_client
     app.dependency_overrides.clear()
+
+
 @pytest.fixture
 def auth_headers(client: TestClient) -> dict[str, str]:
     """Crée un compte, se connecte et renvoie l'en-tête d'authentification."""
     email = f"user-{uuid.uuid4().hex[:8]}@example.com"
     password = "Motdepasse123!"
 
-    register = client.post(
-        "/api/v1/auth/register", json={"email": email, "password": password}
-    )
+    register = client.post("/api/v1/auth/register", json={"email": email, "password": password})
     assert register.status_code in (200, 201), register.text
 
     # Version « formulaire OAuth2 » (champs username et password)
-    login = client.post(
-        "/api/v1/auth/login", data={"username": email, "password": password}
-    )
+    login = client.post("/api/v1/auth/login", data={"username": email, "password": password})
     # Si le résultat de l'étape 1 était 'application/json', remplace par :
     # login = client.post(
     #     "/api/v1/auth/login", json={"email": email, "password": password}

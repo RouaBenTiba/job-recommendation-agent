@@ -13,13 +13,9 @@ from pydantic import (
 from app.schemas.common import dedupe
 
 ContractType = Literal["internship", "apprenticeship", "full_time", "part_time", "contract"]
-Place = Annotated[
-    str, StringConstraints(strip_whitespace=True, min_length=1, max_length=100)
-]
+Place = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=100)]
 
-ContractTypes = Annotated[
-    list[ContractType], Field(max_length=5), AfterValidator(dedupe)
-]
+ContractTypes = Annotated[list[ContractType], Field(max_length=5), AfterValidator(dedupe)]
 Places = Annotated[list[Place], Field(max_length=20), AfterValidator(dedupe)]
 
 

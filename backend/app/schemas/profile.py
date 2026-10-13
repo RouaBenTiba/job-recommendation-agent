@@ -13,13 +13,9 @@ from pydantic import (
 
 from app.schemas.common import dedupe
 
-ShortText = Annotated[
-    str, StringConstraints(strip_whitespace=True, min_length=1, max_length=100)
-]
+ShortText = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=100)]
 LongText = Annotated[str, StringConstraints(strip_whitespace=True, max_length=2000)]
-Tag = Annotated[
-    str, StringConstraints(strip_whitespace=True, min_length=1, max_length=80)
-]
+Tag = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=80)]
 PartialDate = Annotated[str, StringConstraints(strip_whitespace=True, max_length=20)]
 TagList = Annotated[list[Tag], Field(max_length=100), AfterValidator(dedupe)]
 
@@ -48,9 +44,7 @@ class ExperienceItem(BaseModel):
     start: PartialDate | None = None  # « 2024 » ou « 2024-06 » : dates partielles
     end: PartialDate | None = None  # vide = en cours
     description: LongText | None = None
-    technologies: Annotated[list[Tag], Field(max_length=30)] = Field(
-        default_factory=list
-    )
+    technologies: Annotated[list[Tag], Field(max_length=30)] = Field(default_factory=list)
 
 
 class ProfileUpdate(BaseModel):

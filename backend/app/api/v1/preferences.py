@@ -24,8 +24,6 @@ def read_preferences(current_user: CurrentUser, db: DbSession) -> PreferencesRea
 
 
 @router.put("", response_model=PreferencesRead)
-def put_preferences(
-    data: PreferencesUpdate, current_user: CurrentUser, db: DbSession
-) -> PreferencesRead:
+def put_preferences(data: PreferencesUpdate, current_user: CurrentUser, db: DbSession) -> PreferencesRead:
     preferences = upsert_preferences(db, current_user.id, data)
     return PreferencesRead.model_validate(preferences)

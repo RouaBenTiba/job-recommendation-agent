@@ -28,7 +28,5 @@ def read_profile(current_user: CurrentUser, db: DbSession) -> CandidateProfile:
 
 
 @router.patch("", response_model=ProfileRead)
-def patch_profile(
-    data: ProfileUpdate, current_user: CurrentUser, db: DbSession
-) -> CandidateProfile:
+def patch_profile(data: ProfileUpdate, current_user: CurrentUser, db: DbSession) -> CandidateProfile:
     return update_profile(db, current_user.id, data)
