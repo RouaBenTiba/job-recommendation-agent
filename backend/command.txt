@@ -1,0 +1,4 @@
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.\.venv\Scripts\Activate.ps1
+docker compose exec postgres psql -U jobreco -d jobreco -c "\dt"
+$env:DATABASE_URL="postgresql://jobreco:rouaoumayma@localhost:5432/jobreco"
