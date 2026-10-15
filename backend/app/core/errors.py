@@ -19,6 +19,8 @@ STATUS_CODES = {
     409: "conflict",
     422: "validation_error",
     429: "too_many_requests",
+    413: "payload_too_large",
+    415: "unsupported_media_type",
 }
 
 

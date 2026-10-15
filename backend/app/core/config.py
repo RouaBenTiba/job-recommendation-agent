@@ -1,6 +1,7 @@
 """Configuration de l'application, chargée depuis l'environnement et backend/.env."""
 
 from functools import lru_cache
+from pathlib import Path
 from typing import Literal
 
 from pydantic import SecretStr, model_validator
@@ -24,6 +25,9 @@ class Settings(BaseSettings):
     access_token_expire_minutes: int = 30
 
     database_url: str
+    storage_dir: Path = Path("storage")
+    max_cv_size_mb: int = 5
+    max_cvs_per_user: int = 10
 
     gemini_api_key: SecretStr | None = None
     gemini_model: str = "gemini-2.5-flash"
