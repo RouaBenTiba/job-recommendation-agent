@@ -42,6 +42,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    volumes:
+      - cv_storage:/app/storage
 
   frontend:
     build: ./frontend
@@ -59,3 +61,4 @@ services:
 volumes:
   postgres_data:
   chroma_data:
+  cv_storage:
