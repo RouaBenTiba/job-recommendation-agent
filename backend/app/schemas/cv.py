@@ -17,3 +17,14 @@ class CVRead(BaseModel):
     error_message: str | None
     created_at: datetime
     updated_at: datetime
+
+
+class CVExtractionRead(BaseModel):
+    cv_id: uuid.UUID
+    status: str
+    method: str
+    page_count: int
+    pages_read: int
+    truncated: bool
+    characters: int
+    text: str

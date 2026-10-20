@@ -27,7 +27,14 @@ class Settings(BaseSettings):
     database_url: str
     storage_dir: Path = Path("storage")
     max_cv_size_mb: int = 5
+
     max_cvs_per_user: int = 10
+    max_cv_pages: int = 10
+    max_extracted_chars: int = 60_000
+    ocr_enabled: bool = False
+    ocr_languages: str = "fra+eng"
+    ocr_dpi: int = 200
+    min_text_chars_before_ocr: int = 50
 
     gemini_api_key: SecretStr | None = None
     gemini_model: str = "gemini-2.5-flash"

@@ -30,6 +30,7 @@ services:
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       CHROMA_HOST: chroma
       CHROMA_PORT: "8000"
+      OCR_ENABLED: "true"
     ports:
       - "8000:8000"
     depends_on:

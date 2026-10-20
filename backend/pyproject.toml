@@ -42,3 +42,7 @@ testpaths = ["tests"]
 addopts = "-q"
 
 pythonpath = ["."]
+[[tool.mypy.overrides]]
+module = ["pymupdf.*"]
+ignore_missing_imports = true
+follow_imports = "skip"
