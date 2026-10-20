@@ -6,8 +6,9 @@ from fastapi import APIRouter, File, HTTPException, UploadFile, status
 from app.api.deps import CurrentUser, DbSession
 from app.core.config import get_settings
 from app.models.cv import CV
-from app.schemas.cv import CVRead
-from app.services import cvs
+from app.schemas.cv import CVExtractionRead, CVRead
+from app.services import cv_extraction, cvs
+from app.services.cv_extraction import CVExtractionError
 from app.services.cvs import CVUploadError
 
 router = APIRouter(prefix="/cvs", tags=["cvs"])
@@ -39,3 +40,24 @@ def read_cv(cv_id: uuid.UUID, current_user: CurrentUser, db: DbSession) -> CV:
     if cv is None:  # same answer for "does not exist" and "belongs to someone else"
         raise HTTPException(status_code=404, detail="CV introuvable.")
     return cv
+
+
+@router.post("/{cv_id}/extract", response_model=CVExtractionRead)
+def extract_cv(cv_id: uuid.UUID, current_user: CurrentUser, db: DbSession) -> CVExtractionRead:
+    cv = cvs.get_cv(db, current_user.id, cv_id)
+    if cv is None:  # même réponse pour « inexistant » et « à quelqu'un d'autre »
+        raise HTTPException(status_code=404, detail="CV introuvable.")
+    try:
+        result = cv_extraction.extract_cv_text(db, cv)
+    except CVExtractionError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from None
+    return CVExtractionRead(
+        cv_id=cv.id,
+        status=cv.status,
+        method=result.method,
+        page_count=result.page_count,
+        pages_read=result.pages_read,
+        truncated=result.truncated,
+        characters=len(result.text),
+        text=result.text,
+    )
