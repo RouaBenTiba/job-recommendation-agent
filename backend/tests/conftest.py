@@ -8,6 +8,9 @@ os.environ.setdefault("DATABASE_URL", "postgresql://test:test@localhost:5432/tes
 os.environ.setdefault("GEMINI_API_KEY", "fake-gemini-key")
 os.environ.setdefault("SECRET_KEY", "test-secret-key-with-at-least-32-bytes!")
 
+from collections.abc import Callable
+
+import pymupdf  # noqa: E402
 import pytest  # noqa: E402
 from fastapi.testclient import TestClient  # noqa: E402
 from sqlalchemy import Engine, create_engine  # noqa: E402
@@ -83,3 +86,37 @@ def auth_headers(client: TestClient) -> dict[str, str]:
     assert login.status_code == 200, login.text
 
     return {"Authorization": f"Bearer {login.json()['access_token']}"}
+
+
+TextBox = tuple[tuple[float, float, float, float], str]
+
+
+@pytest.fixture
+def make_pdf() -> Callable[[list[str]], bytes]:
+    """Fabrique un PDF : une page par texte fourni (retours à la ligne conservés)."""
+
+    def factory(pages: list[str]) -> bytes:
+        doc = pymupdf.open()
+        for text in pages:
+            doc.new_page().insert_text((72, 72), text, fontsize=11)
+        data: bytes = doc.tobytes()
+        doc.close()
+        return data
+
+    return factory
+
+
+@pytest.fixture
+def make_layout_pdf() -> Callable[[list[TextBox]], bytes]:
+    """Fabrique un PDF d'une page avec des zones de texte (x0, y0, x1, y1)."""
+
+    def factory(boxes: list[TextBox]) -> bytes:
+        doc = pymupdf.open()
+        page = doc.new_page(width=595, height=842)
+        for rect, text in boxes:
+            page.insert_textbox(pymupdf.Rect(*rect), text, fontsize=10)
+        data: bytes = doc.tobytes()
+        doc.close()
+        return data
+
+    return factory
