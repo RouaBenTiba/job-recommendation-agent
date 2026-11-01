@@ -115,11 +115,12 @@ def test_oversized_file_is_rejected_and_not_stored(
 ) -> None:
     monkeypatch.setenv("MAX_CV_SIZE_MB", "1")
     get_settings.cache_clear()
+    owner = uuid.UUID(client.get("/api/v1/auth/me", headers=auth_headers).json()["id"])
     response = upload(client, auth_headers, content=PDF + b"0" * (1024 * 1024))
     assert response.status_code == 413
     assert response.json()["code"] == "payload_too_large"
     assert stored_files(storage_dir) == []
-    assert db_session.scalar(select(func.count()).select_from(CV)) == 0
+    assert db_session.scalar(select(func.count()).select_from(CV).where(CV.user_id == owner)) == 0
 
 
 def test_file_at_the_exact_limit_is_accepted(
