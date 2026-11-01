@@ -16,3 +16,4 @@ argon2-cffi>=23.1
 PyJWT>=2.9
 python-multipart>=0.0.9
 email-validator>=2.2
+google-genai>=2.33,<3

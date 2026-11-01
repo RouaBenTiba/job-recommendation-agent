@@ -1,0 +1,32 @@
+Daniel Okafor
+Senior Data Engineer
+daniel.okafor@example.com · +44 7700 900123 · London, UK
+
+SUMMARY
+Data engineer with 4 years of experience building batch and streaming pipelines on AWS.
+
+EXPERIENCE
+Data Engineer, Brightwave Analytics — London   Mar 2022 – Present
+- Designed ETL pipelines in Python and SQL processing 2 TB of data per day
+- Orchestrated workflows with Apache Airflow and deployed infrastructure with Terraform
+- Reduced Spark job runtime by 40% by tuning partitions
+
+Junior Data Analyst, Harbor Retail Group — Manchester   Sep 2020 – Feb 2022
+- Built dashboards in Tableau and automated weekly reports with Python and pandas
+
+EDUCATION
+MSc Computer Science, University of Exampleton   2018 – 2020
+BSc Mathematics, Northfield College   2015 – 2018
+
+SKILLS
+Python, SQL, Apache Spark, Apache Airflow, AWS (S3, Glue, Redshift), Terraform, Docker, Tableau
+Stakeholder communication, mentoring
+
+CERTIFICATIONS
+AWS Certified Data Analytics – Specialty
+
+INTERESTS
+Trail running, open-source contributions
+
+OBJECTIVE
+Looking for a lead data engineering role in a product-focused team.

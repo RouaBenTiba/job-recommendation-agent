@@ -21,6 +21,8 @@ STATUS_CODES = {
     429: "too_many_requests",
     413: "payload_too_large",
     415: "unsupported_media_type",
+    502: "bad_gateway",
+    503: "service_unavailable",
 }
 
 

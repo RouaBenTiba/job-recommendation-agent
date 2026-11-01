@@ -1,0 +1,33 @@
+Amel Trabelsi
+Étudiante ingénieure en informatique
+amel.trabelsi@example.com | +216 20 000 000 | Sousse, Tunisie
+linkedin.com/in/amel-trabelsi-exemple
+
+PROFIL
+Étudiante en 3e année du cycle ingénieur, à la recherche d'un stage de fin d'études en développement web et data.
+
+FORMATION
+2023 - 2026  Cycle ingénieur en informatique, École Nationale d'Ingénieurs de Sousse
+2021 - 2023  Classes préparatoires MPI, Institut Préparatoire aux Études d'Ingénieurs de Monastir
+
+EXPÉRIENCE
+Juin 2025 - Août 2025  Stagiaire développeuse web, Société Exemple SARL (Sousse)
+- Développement d'une application de gestion de stocks avec FastAPI et React
+- Mise en place d'une base PostgreSQL et déploiement avec Docker
+
+Juillet 2024  Stagiaire d'initiation, Atelier Numérique Démo (Tunis)
+- Création de pages web en HTML, CSS et JavaScript
+
+PROJETS
+Plateforme de covoiturage universitaire (Python, Django, MySQL)
+
+COMPÉTENCES
+Langages : Python, Java, JavaScript, SQL
+Outils : Git, Docker, Linux
+Soft skills : travail en équipe, communication, autonomie
+
+LANGUES
+Français (courant), Anglais (B2), Arabe (langue maternelle)
+
+CENTRES D'INTÉRÊT
+Robotique, échecs, bénévolat associatif

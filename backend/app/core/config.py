@@ -38,6 +38,8 @@ class Settings(BaseSettings):
 
     gemini_api_key: SecretStr | None = None
     gemini_model: str = "gemini-2.5-flash"
+    llm_max_attempts: int = 3
+    llm_timeout_seconds: int = 30
 
     adzuna_app_id: str | None = None
     adzuna_app_key: SecretStr | None = None

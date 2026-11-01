@@ -1,0 +1,6 @@
+Karim B.
+Étudiant en licence informatique
+karim.b@example.com
+
+Formation : Licence en informatique, Faculté des Sciences de Tunis (2022 - 2025)
+Compétences : Python, SQL, Excel
