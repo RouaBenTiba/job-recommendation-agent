@@ -1,0 +1,22 @@
+Sofia Marchand
+COMPÉTENCES
+Développeuse full stack
+TypeScript, React, Node.js
+sofia.marchand@example.com
+PostgreSQL, Redis
++33 6 00 00 00 00
+Docker, GitHub Actions
+EXPERIENCE
+LANGUES
+2023 - 2025  Full Stack Developer — Lumen Studio (Lyon)
+Français (natif)
+Built a booking platform used by 50k users with React and Node.js.
+English (fluent)
+Migrated the database to PostgreSQL and set up CI with GitHub Actions.
+2021 - 2023  Développeuse web — Atelier Pixel (Grenoble)
+CENTRES D'INTÉRÊT
+Refonte du site e-commerce d'un client en TypeScript et React.
+Escalade, photographie
+FORMATION
+Master Informatique, Université Exemple de Grenoble, 2019 - 2021
+Licence Informatique, Université Exemple de Grenoble, 2016 - 2019
