@@ -8,6 +8,7 @@ from app.db.session import get_db
 from app.models.candidate_profile import CandidateProfile
 from app.models.user import User
 from app.schemas.profile import ProfileRead, ProfileUpdate, ProfileVersionRead
+from app.services.profile_vector import refresh_profile_vector
 from app.services.profiles import (
     get_current_profile,
     get_profile_version,
@@ -15,7 +16,7 @@ from app.services.profiles import (
     restore_profile_version,
     update_profile,
 )
-from app.services.profile_vector import refresh_profile_vector
+
 router = APIRouter(prefix="/profile", tags=["profile"])
 
 CurrentUser = Annotated[User, Depends(get_current_user)]
