@@ -79,3 +79,14 @@ class ProfileRead(BaseModel):
     interests: list[str]
     created_at: datetime
     updated_at: datetime
+
+
+class ProfileVersionRead(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: uuid.UUID
+    version: int
+    is_current: bool
+    source: str
+    extraction_model: str | None
+    created_at: datetime
