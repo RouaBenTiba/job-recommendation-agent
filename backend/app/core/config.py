@@ -49,6 +49,10 @@ class Settings(BaseSettings):
     langfuse_public_key: str | None = None
     langfuse_secret_key: SecretStr | None = None
 
+    cookie_name: str = "access_token"
+    cookie_secure: bool = False  # doit être True derrière HTTPS (imposé en production)
+    cookie_samesite: Literal["lax", "strict"] = "lax"
+
     @model_validator(mode="after")
     def _check_production(self) -> "Settings":
         if self.app_env == "production":
@@ -56,6 +60,8 @@ class Settings(BaseSettings):
                 raise ValueError("SECRET_KEY doit être défini en production")
             if self.gemini_api_key is None:
                 raise ValueError("GEMINI_API_KEY est requis en production")
+            if not self.cookie_secure:
+                raise ValueError("COOKIE_SECURE doit être activé en production (HTTPS)")
         return self
 
 

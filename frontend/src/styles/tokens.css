@@ -1,0 +1,71 @@
+/* Design tokens: one place for colour, type and shape. */
+:root {
+  /* Palette: sea ink, lagoon (actions), foam (background), saffron (progress only). */
+  --ink: #0f2f35;
+  --saffron: #f0a32f;
+
+  --bg: #eef4f3;
+  --surface: #ffffff;
+  --paper: #ffffff; /* the CV sheet stays white in both themes */
+  --text: #0f2f35;
+  --muted: #4f6a70;
+  --line: #d3e0de;
+  --line-strong: #b4c8c5;
+
+  --primary: #0e7c7b;
+  --primary-strong: #0a5f5e;
+  --primary-ink: #0a5f5e; /* links and outlined buttons */
+  --primary-soft: #e2f0ee;
+  --on-primary: #ffffff;
+  --focus-ring: rgb(14 124 123 / 0.28);
+
+  --danger: #b3261e;
+  --danger-bg: #fdeceb;
+  --success: #1e6b4a;
+  --success-bg: #e4f3ec;
+  --warning: #7a4b00;
+  --warning-bg: #fff2d9;
+  --info: #0a5f5e;
+  --info-bg: #e2f0ee;
+
+  /* Shape: three radii with three jobs, not one radius for everything. */
+  --radius-control: 10px;
+  --radius-panel: 18px;
+  --radius-sheet: 6px;
+
+  /* Type */
+  --font-body: 'Figtree Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Bricolage Grotesque Variable', 'Figtree Variable', system-ui, sans-serif;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+
+  --rail-width: 17rem;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0c1a1d;
+    --surface: #12262a;
+    --text: #e6f0ee;
+    --muted: #9db4b3;
+    --line: #223a3f;
+    --line-strong: #35545a;
+
+    --primary: #4fc3ba;
+    --primary-strong: #6fd3cb;
+    --primary-ink: #6fd3cb;
+    --primary-soft: rgb(79 195 186 / 0.13);
+    --on-primary: #062124;
+    --focus-ring: rgb(79 195 186 / 0.32);
+
+    --danger: #ff9d94;
+    --danger-bg: #3a1f1d;
+    --success: #86d9ad;
+    --success-bg: #14301f;
+    --warning: #f5cd84;
+    --warning-bg: #3a3017;
+    --info: #6fd3cb;
+    --info-bg: rgb(79 195 186 / 0.13);
+  }
+}
