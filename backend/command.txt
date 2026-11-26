@@ -2,3 +2,10 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 .\.venv\Scripts\Activate.ps1
 docker compose exec postgres psql -U jobreco -d jobreco -c "\dt"
 $env:DATABASE_URL="postgresql://jobreco:rouaoumayma@localhost:5432/jobreco"
+
+
+python -m ruff check .; python -m black --check .; python -m mypy app
+python -m ruff check . --fix
+python -m black app tests
+
+python scripts/evaluate_profile_extraction.py --list-models
